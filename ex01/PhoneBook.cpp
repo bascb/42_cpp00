@@ -6,13 +6,15 @@
 /*   By: bcastelo <bcastelo@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 15:43:58 by bcastelo          #+#    #+#             */
-/*   Updated: 2024/01/28 22:44:55 by bcastelo         ###   ########.fr       */
+/*   Updated: 2024/01/29 21:48:54 by bcastelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
 
 std::string	fill_field(std::string label);
+
+void	print_cell(std::string str);
 
 void	PhoneBook::add()
 {
@@ -45,14 +47,16 @@ void	PhoneBook::print_list()
 	
 	for (int i = 0; i < MAX_CONTACTS; i++)
 	{
-		std::cout << std::setw(11);
-		std::cout << i << "|";
-		std::cout << contacts[i].first_name << "|";
-		std::cout << contacts[i].last_name << "|";
-		std::cout << contacts[i].nickname << "|";
-		std::cout << contacts[i].phone_number << "|";
-		std::cout << contacts[i].darkest_secret << "|";
-		std::cout << std::endl;
+		if (!contacts[i].first_name.empty())
+		{
+			std::cout << i << "|";
+			print_cell(contacts[i].first_name);
+			print_cell(contacts[i].last_name);
+			print_cell(contacts[i].nickname);
+			print_cell(contacts[i].phone_number);
+			print_cell(contacts[i].darkest_secret);
+			std::cout << std::endl;
+		}
 	}
 	std::cout << "Enter desired contact index:";
 	std::cin >> index;
@@ -67,8 +71,18 @@ std::string	fill_field(std::string label)
 	while (answer.empty())
 	{
 		std::cout << label;
-		std::cin >> answer;
-		std::cin.clear();
+		std::getline(std::cin, answer);
 	}
 	return (answer);
+}
+
+void	print_cell(std::string str)
+{
+	if (str.length() > 10)
+	{
+		str.resize(9);
+		str += a;
+	}
+	std::cout << std::setw(11);
+	std::cout << str << "|";
 }
