@@ -6,7 +6,7 @@
 /*   By: bcastelo <bcastelo@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 15:43:58 by bcastelo          #+#    #+#             */
-/*   Updated: 2024/01/29 21:48:54 by bcastelo         ###   ########.fr       */
+/*   Updated: 2024/01/31 20:32:39 by bcastelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,26 +42,58 @@ void	PhoneBook::print(int index)
 }
 
 void	PhoneBook::print_list()
-{
-	int	index;
-	
+{	
+	if (contacts[0].first_name.empty())
+	{
+		std::cout << "The Phone book is empty!" << std::endl;
+		return ;
+	}
+	print_cell("index");
+	print_cell("first name");
+	print_cell("last name");
+	print_cell("nickname");
+	std::cout << std::endl;
 	for (int i = 0; i < MAX_CONTACTS; i++)
 	{
 		if (!contacts[i].first_name.empty())
 		{
+			std::cout << std::setw(10);
 			std::cout << i << "|";
 			print_cell(contacts[i].first_name);
 			print_cell(contacts[i].last_name);
-			print_cell(contacts[i].nickname);
-			print_cell(contacts[i].phone_number);
-			print_cell(contacts[i].darkest_secret);
+			print_cell(contacts[i].nickname);	
 			std::cout << std::endl;
 		}
 	}
-	std::cout << "Enter desired contact index:";
-	std::cin >> index;
-	if (index >= 0 && index < MAX_CONTACTS)
-		print(index);
+}
+
+int	PhoneBook::get_index()
+{
+	int	index;
+	int	max;
+
+	max = 0;
+	while (!contacts[max].first_name.empty() && max < MAX_CONTACTS)
+		max++;
+	max--;
+	if (max == -1)
+		return (max);
+	while (1)
+	{
+		std::cout << "Enter the index of the desired contact: ";
+		if (std::cin >> index && index >= 0 && index <= max)
+		{
+			std::cin.ignore();
+			break;
+		}
+		else
+		{
+			std::cout << "Must be an integer between 0 and " << max << std::endl;
+			std::cin.clear();
+			std::cin.ignore();
+		}	
+	}
+	return (index);
 }
 
 std::string	fill_field(std::string label)
@@ -81,8 +113,8 @@ void	print_cell(std::string str)
 	if (str.length() > 10)
 	{
 		str.resize(9);
-		str += a;
+		str += ".";
 	}
-	std::cout << std::setw(11);
+	std::cout << std::setw(10);
 	std::cout << str << "|";
 }
