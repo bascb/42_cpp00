@@ -6,60 +6,99 @@
 /*   By: bcastelo <bcastelo@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 11:39:21 by bcastelo          #+#    #+#             */
-/*   Updated: 2024/02/03 12:15:58 by bcastelo         ###   ########.fr       */
+/*   Updated: 2024/02/03 21:50:07 by bcastelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Account.hpp"
+#include <iostream>
 
-public:
+int	Account::_nbAccounts = 0;
+int	Account::_totalAmount = 0;
+int	Account::_totalNbDeposits = 0;
+int	Account::_totalNbWithdrawals = 0;
 
-static int	Account::getNbAccounts( void )
+int	Account::getNbAccounts( void )
 {
-	return (0);
+	return (_nbAccounts);
 }
 
-static int	Account::getTotalAmount( void )
+int	Account::getTotalAmount( void )
 {
-	return (0);	
+	return (_totalAmount);	
 }
 
-static int	Account::getNbDeposits( void )
+int	Account::getNbDeposits( void )
 {
-	return (0);
+	return (_totalNbDeposits);
 }
 
-static int	Account::getNbWithdrawals( void )
+int	Account::getNbWithdrawals( void )
 {
-	return (0);
+	return (_totalNbWithdrawals);
 }
 
-static void	Account::displayAccountsInfos( void )
+void	Account::displayAccountsInfos( void )
 {
-	std::cout << "Test" << std::endl;
+	std::cout << "accounts:" << _nbAccounts << ";total:" << _totalAmount << ";deposits:" << _totalNbDeposits << ";withdrawals:" << _totalNbWithdrawals << std::endl;
 }
 
 Account::Account( int initial_deposit )
 {
-	std::cout << "Constructor" << std::endl;
+	static int	index;
+
+	_accountIndex = index++;
+	_amount = initial_deposit;
+	_nbDeposits = 0;
+	_nbWithdrawals = 0;
+	_totalAmount += _amount;
+	_nbAccounts++;
+	std::cout << "index:" << _accountIndex << ";amount:" << _amount << ";created" << std::endl;
 }
 
 Account::~Account( void )
 {
-	std::cout << "Destructor" << std::endl;
+	std::cout << "index:" << _accountIndex << ";amount:" << _amount << ";closed" << std::endl;
 }
 
 void	Account::makeDeposit( int deposit )
 {
-		std::cout << "Test" << std::endl;
+		std::cout << deposit << std::endl;
 }
 
 bool	Account::makeWithdrawal( int withdrawal )
 {
+	if (withdrawal > 100)
+		return (false);
 	return (true);
 }
 
-int		Account::checkAmount( void ) const;
-void	displayStatus( void ) const;
+int		Account::checkAmount( void ) const
+{
+	return (0);
+}
 
-private:
+void	Account::displayStatus( void ) const
+{
+	std::cout << "Status" << std::endl;
+}
+
+void	Account::_displayTimestamp( void )
+{
+	std::cout << "Test" << std::endl;
+}
+
+Account::Account( void )
+{
+	static int	defined;
+	
+	if (!defined)
+	{
+	//	_nbAccounts = 0;
+	//	_totalAmount = 0;
+	//	_totalNbDeposits = 0;
+	//	_totalNbWithdrawals = 0;
+	defined = 1;
+	}
+	std::cout << "Constructor Private" << std::endl;
+}
