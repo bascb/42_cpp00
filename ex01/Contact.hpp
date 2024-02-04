@@ -6,7 +6,7 @@
 /*   By: bcastelo <bcastelo@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 10:48:09 by bcastelo          #+#    #+#             */
-/*   Updated: 2024/01/28 15:22:29 by bcastelo         ###   ########.fr       */
+/*   Updated: 2024/02/04 15:20:54 by bcastelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 class Contact
 {
 	public:
+		void		set_field(std::string field, std::string value);
+		std::string	get_field(std::string field);	
+	private:
 		std::string  first_name;
 		std::string  last_name;
 		std::string  nickname;

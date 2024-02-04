@@ -6,7 +6,7 @@
 /*   By: bcastelo <bcastelo@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 15:43:58 by bcastelo          #+#    #+#             */
-/*   Updated: 2024/01/31 20:32:39 by bcastelo         ###   ########.fr       */
+/*   Updated: 2024/02/04 15:40:19 by bcastelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ void	PhoneBook::add()
 	static int	i = 0;
 	
 	std::cout << "Please fill in the fields, one by one. There cannot be blank fields." << std::endl;
-	contacts[i].first_name = fill_field("First name:");
-	contacts[i].last_name = fill_field("Last name:");
-	contacts[i].nickname = fill_field("Nickname:");
-	contacts[i].phone_number = fill_field("Phone number:");
-	contacts[i].darkest_secret = fill_field("Darkest secret:");
+	contacts[i].set_field("first name", fill_field("First name:"));
+	contacts[i].set_field("last name", fill_field("Last name:"));
+	contacts[i].set_field("nickname", fill_field("Nickname:"));
+	contacts[i].set_field("phone number", fill_field("Phone number:"));
+	contacts[i].set_field("darkest secret", fill_field("Darkest secret:"));
 	if (i + 1 == MAX_CONTACTS)
 		i = 0;
 	else
@@ -34,16 +34,16 @@ void	PhoneBook::add()
 
 void	PhoneBook::print(int index)
 {
-	std::cout << "First name: " << contacts[index].first_name << std::endl;
-	std::cout << "Last name: " << contacts[index].last_name << std::endl;
-	std::cout << "Nickname: " << contacts[index].nickname << std::endl;
-	std::cout << "Phone number: " << contacts[index].phone_number << std::endl;
-	std::cout << "Darkest secret: " << contacts[index].darkest_secret << std::endl;
+	std::cout << "First name: " << contacts[index].get_field("first name") << std::endl;
+	std::cout << "Last name: " << contacts[index].get_field("last name") << std::endl;
+	std::cout << "Nickname: " << contacts[index].get_field("nickname") << std::endl;
+	std::cout << "Phone number: " << contacts[index].get_field("phone number") << std::endl;
+	std::cout << "Darkest secret: " << contacts[index].get_field("darkest secret") << std::endl;
 }
 
 void	PhoneBook::print_list()
 {	
-	if (contacts[0].first_name.empty())
+	if (contacts[0].get_field("first name").empty())
 	{
 		std::cout << "The Phone book is empty!" << std::endl;
 		return ;
@@ -55,13 +55,13 @@ void	PhoneBook::print_list()
 	std::cout << std::endl;
 	for (int i = 0; i < MAX_CONTACTS; i++)
 	{
-		if (!contacts[i].first_name.empty())
+		if (!contacts[i].get_field("first name").empty())
 		{
 			std::cout << std::setw(10);
 			std::cout << i << "|";
-			print_cell(contacts[i].first_name);
-			print_cell(contacts[i].last_name);
-			print_cell(contacts[i].nickname);	
+			print_cell(contacts[i].get_field("first name"));
+			print_cell(contacts[i].get_field("last name"));
+			print_cell(contacts[i].get_field("nickname"));	
 			std::cout << std::endl;
 		}
 	}
@@ -73,7 +73,7 @@ int	PhoneBook::get_index()
 	int	max;
 
 	max = 0;
-	while (!contacts[max].first_name.empty() && max < MAX_CONTACTS)
+	while (!contacts[max].get_field("first name").empty() && max < MAX_CONTACTS)
 		max++;
 	max--;
 	if (max == -1)
