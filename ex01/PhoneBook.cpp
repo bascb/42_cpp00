@@ -6,7 +6,7 @@
 /*   By: bcastelo <bcastelo@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 15:43:58 by bcastelo          #+#    #+#             */
-/*   Updated: 2024/02/04 18:12:24 by bcastelo         ###   ########.fr       */
+/*   Updated: 2024/02/05 19:03:20 by bcastelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	PhoneBook::get_index()
 	int	max;
 
 	max = 0;
-	while (max < MAX_CONTACTS && max < MAX_CONTACTS && !contacts[max].get_field("first name").empty())
+	while (max < MAX_CONTACTS && !contacts[max].get_field("first name").empty())
 		max++;
 	max--;
 	if (max == -1)
