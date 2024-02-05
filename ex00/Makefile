@@ -6,7 +6,7 @@ SRC = megaphone.cpp
 all: $(NAME)
 
 $(NAME):
-	$(CC) $(CXXFLAGS) -o $(NAME) $(SRC)
+	$(CXX) $(CXXFLAGS) -o $(NAME) $(SRC)
 	
 clean:
 	rm -f *.o
